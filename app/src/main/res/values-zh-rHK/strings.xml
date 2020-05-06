@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FYP_anroid</string>
+    <string name="SignInBtn">登入</string>
+    <string name="UserNameHint">用戶名</string>
+    <string name="PasswordHint">密碼</string>
+    <string name="MyFavoriteBtn">我的最愛</string>
+    <string name="SearchDoctorBtn">搜尋醫生</string>
+    <string name="DoctorNameTv">醫生名稱:</string>
+    <string name="BackBtn">返回</string>
+    <string name="AddCommentBtn">說</string>
+    <string name="CommentBtn">留言</string>
+    <string name="location">地點</string>
+    <string name="DoctorChiName">醫生英文名稱:</string>
+    <string name="Subject">科目:</string>
+    <string name="Mark">分數</string>
+    <string name="LocationD1">中西區</string>
+    <string name="LocationD2">灣仔區</string>
+    <string name="LocationD3">東區</string>
+    <string name="LocationD4">南區</string>
+    <string name="LocationD5">黃大仙區</string>
+    <string name="LocationD6">觀塘區</string>
+    <string name="LocationD7">深水埗區</string>
+    <string name="LocationD8">油尖旺區</string>
+    <string name="LocationD9">九龍城區</string>
+    <string name="LocationD10">北區</string>
+    <string name="LocationD11">大埔區</string>
+    <string name="LocationD12">沙田區</string>
+    <string name="LocationD13">西貢區</string>
+    <string name="LocationD14">葵青區</string>
+    <string name="LocationD15">荃灣區</string>
+    <string name="LocationD16">屯門區</string>
+    <string name="LocationD17">元朗區</string>
+    <string name="LocationD18">離島區</string>
+    <string name="Locationregion">地區</string>
+    <string name="OnG">婦產科</string>
+</resources>

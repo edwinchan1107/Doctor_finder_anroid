@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">FYP_anroid</string>
+    <string name="SignInBtn">SIGN IN</string>
+    <string name="UserNameHint">Username</string>
+    <string name="PasswordHint">Password</string>
+    <string name="MyFavoriteBtn">My Favorite</string>
+    <string name="SearchDoctorBtn">Search Doctor</string>
+    <string name="DoctorNameTv">Doctor Name:</string>
+    <string name="BackBtn">Back</string>
+    <string name="AddCommentBtn">Say</string>
+    <string name="CommentBtn">Comment</string>
+    <string name="location">Location</string>
+    <string name="DoctorChiName">DoctorChiName:</string>
+    <string name="Subject">Subject:</string>
+    <string name="Mark">Mark</string>
+    <string name="LocationD1">CentralAndWestern</string>
+    <string name="LocationD2">WanChai</string>
+    <string name="LocationD3">Eastern</string>
+    <string name="LocationD4">Southern</string>
+    <string name="LocationD5">WongTaiSin</string>
+    <string name="LocationD6">KwunTong</string>
+    <string name="LocationD7">ShamShuiPo</string>
+    <string name="LocationD8">YauTsimMong</string>
+    <string name="LocationD9">KowloonCity</string>
+    <string name="LocationD10">North</string>
+    <string name="LocationD11">TaiPo</string>
+    <string name="LocationD12">ShaTin</string>
+    <string name="LocationD13">SaiKung</string>
+    <string name="LocationD14">KwaiTsing</string>
+    <string name="LocationD15">TsuenWan</string>
+    <string name="LocationD16">TuenMun</string>
+    <string name="LocationD17">YuenLong</string>
+    <string name="LocationD18">Islands</string>
+    <string name="Locationregion">Region</string>
+    <string name="OnG">Obstetrics and Gynecology</string>
+</resources>

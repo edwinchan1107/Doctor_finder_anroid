@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:id="@+id/linearLayout">
+
+
+
+            <EditText android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/UserNameHint"
+                android:textColor="#FF192133"
+                android:textColorHint="#A0192133"
+                android:fontFamily="sans-serif-light"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+            <EditText android:id="@+id/editPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="#FF192133"
+                android:textColorHint="#A0192133"
+                android:fontFamily="sans-serif-light"
+                android:hint="@string/PasswordHint"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+
+            <Button
+                android:id="@+id/btnSignIn"
+                style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/SignInBtn"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+</ScrollView>
+

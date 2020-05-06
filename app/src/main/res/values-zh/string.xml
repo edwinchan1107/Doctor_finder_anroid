@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FYP_anroid</string>
+    <string name="SignInBtn">登入</string>
+    <string name="UserNameHint">用戶名</string>
+    <string name="PasswordHint">密碼</string>
+    <string name="MyFavoriteBtn">我的最愛</string>
+    <string name="SearchDoctorBtn">搜尋醫生</string>
+    <string name="DoctorNameTv">醫生名稱:</string>
+    <string name="BackBtn">返回</string>
+    <string name="AddCommentBtn">說</string>
+    <string name="CommentBtn">留言</string>
+    <string name="location">地點</string>
+    <string name="DoctorChiName">醫生英文名稱:</string>
+    <string name="Subject">科目:</string>
+
+</resources>

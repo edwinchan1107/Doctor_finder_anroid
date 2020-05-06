@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DoctorPage">
+
+    <TextView
+        android:id="@+id/detail_tv_name_eng"
+        android:layout_width="127dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/detail_tv_name_chi"
+        android:layout_width="133dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/detail_tv_name_eng"
+        app:layout_constraintStart_toStartOf="@+id/detail_tv_name_eng"
+        app:layout_constraintTop_toBottomOf="@+id/detail_tv_name_eng" />
+
+    <TextView
+        android:id="@+id/detail_tv_mark"
+        android:layout_width="72dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginLeft="168dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/detail_tv_name_eng"
+        app:layout_constraintTop_toTopOf="@+id/detail_tv_name_eng" />
+
+    <TextView
+        android:id="@+id/detail_tv_location"
+        android:layout_width="358dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="48dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/detail_tv_name_chi"
+        app:layout_constraintTop_toBottomOf="@+id/detail_tv_name_chi" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="410dp"
+        android:layout_height="324dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_go_comment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_tv_location"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_Add_favorite"
+        android:layout_width="194dp"
+        android:layout_height="72dp"
+        android:background="@drawable/baseline_star_black_18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_go_comment"
+        android:layout_width="214dp"
+        android:layout_height="72dp"
+        android:background="@drawable/baseline_comment_black_18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
