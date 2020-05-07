@@ -17,8 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -110,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("result message", message);
 
 
+                
                 if (message.equals("Auth successful")) {
                     //-save the user id in session/share-//
                     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
