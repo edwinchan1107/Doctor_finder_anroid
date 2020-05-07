@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FYP_anroid</string>
+    <string name="app_name">Doctor Finder</string>
     <string name="SignInBtn">SIGN IN</string>
     <string name="UserNameHint">Username</string>
     <string name="PasswordHint">Password</string>
