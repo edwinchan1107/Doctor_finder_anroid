@@ -1,7 +1,5 @@
 package com.example.fyp_anroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
     JSONParser jsonParser=new JSONParser();
-    Button btnSearch,btnFavorite;
+    Button btnSearch,btnFavorite,btnlogout;
     String userId ="";
     String URL= "https://ivefypnodejsbackned.herokuapp.com/favorites/getallbyuserid";
     @Override
@@ -32,6 +32,7 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         btnSearch = (Button)findViewById(R.id.btn_search);
         btnFavorite = (Button)findViewById(R.id.btn_favorite);
+        btnlogout= (Button)findViewById(R.id.btn_logout);
         //---get user id
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = preferences.getString("LoginUserId", null);
@@ -41,7 +42,11 @@ public class HomePage extends AppCompatActivity {
                 GoToSearchPanel();
             }
         });
-
+        btnlogout.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                logout();
+            }
+        });
         btnFavorite.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 GetAllFavoriteByUserId getAllFavoriteByUserId = new GetAllFavoriteByUserId(HomePage.this);
@@ -52,6 +57,11 @@ public class HomePage extends AppCompatActivity {
 
     public void GoToSearchPanel(){
         Intent intent = new Intent(this, SearchPanel.class);
+
+        startActivity(intent);
+    }
+    public void logout(){
+        Intent intent = new Intent(this, MainActivity.class);
 
         startActivity(intent);
     }

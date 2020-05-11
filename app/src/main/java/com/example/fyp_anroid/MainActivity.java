@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("result message", message);
 
 
-                
+
                 if (message.equals("Auth successful")) {
                     //-save the user id in session/share-//
                     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
