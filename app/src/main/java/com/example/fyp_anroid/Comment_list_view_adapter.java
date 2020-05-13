@@ -1,9 +1,6 @@
 package com.example.fyp_anroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,10 +44,11 @@ public class Comment_list_view_adapter extends BaseAdapter {
         TextView tv_Comment_CreateTime = (TextView) convertView.findViewById(R.id.tv_Comment_CreateTime);
         TextView tv_CreateUserName = (TextView) convertView.findViewById(R.id.tv_CreateUserName);
         TextView tv_CommentMark     = (TextView) convertView.findViewById(R.id.tv_CommentMark);
-        tv_Comment_ID.setText("CommentId : "+mData.get(position).getCommentId());
-        tv_Comment.setText("CommentDetail : "+mData.get(position).getComment());
-        tv_Comment_CreateTime.setText("CreateTime : "+mData.get(position).getCreateTime());
-        tv_CreateUserName.setText("CreateUser : "+mData.get(position).getCreateUserName());
+       // tv_Comment_ID.setText("CommentId : "+mData.get(position).getCommentId());
+        //tv_Comment.setText("CommentDetail : "+mData.get(position).getComment());
+        tv_Comment.setText(mData.get(position).getCreateUserName()+" : "+mData.get(position).getComment());
+       // tv_Comment_CreateTime.setText("CreateTime : "+mData.get(position).getCreateTime());
+        //tv_CreateUserName.setText("CreateUser : "+mData.get(position).getCreateUserName());
         tv_CommentMark.setText("Mark : "+mData.get(position).getCommentmark());
 
 
