@@ -4,12 +4,14 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -245,8 +247,12 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
             mDialog = new ProgressDialog(context);
             mDialog.setMessage("Please wait...");
             mDialog.show();
-            super.onPreExecute();
-            super.onPreExecute();
+
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(SearchPanel.this);
+            SharedPreferences.Editor editor = pref.edit();
+
+            editor.putString("BackPage","SearchPanel");
+            editor.apply();
         }
         @Override
         protected JSONObject doInBackground(String... args) {

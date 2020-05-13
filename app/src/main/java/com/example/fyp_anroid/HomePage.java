@@ -78,8 +78,11 @@ public class HomePage extends AppCompatActivity {
             mDialog = new ProgressDialog(context);
             mDialog.setMessage("Please wait...");
             mDialog.show();
-            super.onPreExecute();
-            super.onPreExecute();
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(HomePage.this);
+            SharedPreferences.Editor editor = pref.edit();
+
+            editor.putString("BackPage","HomePage");
+            editor.apply();
         }
         @Override
         protected JSONObject doInBackground(String... args) {

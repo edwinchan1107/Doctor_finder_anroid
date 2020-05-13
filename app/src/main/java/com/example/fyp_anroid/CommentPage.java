@@ -1,7 +1,5 @@
 package com.example.fyp_anroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -34,7 +34,7 @@ public class CommentPage extends AppCompatActivity {
     //----
     JSONParser jsonParser=new JSONParser();
     EditText ed_Comment;
-    Button add_Comment;
+    Button add_Comment,btn_back;
     String doctorId = "";
     String userId ="";
 
@@ -48,6 +48,7 @@ public class CommentPage extends AppCompatActivity {
         ed_Comment = (EditText) findViewById(R.id.ed_comment);
         add_Comment = (Button) findViewById(R.id.add_comment);
         CommentList = (ListView)findViewById(R.id.CommentList);
+        btn_back = (Button) findViewById(R.id.BackDoctorPage);
         //get doctor id first
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         doctorId = preferences.getString("_id", null);
@@ -75,6 +76,14 @@ public class CommentPage extends AppCompatActivity {
             }
         });
 
+        //--btn back
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CommentPage.this, DoctorPage.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private class GetAllCommentByDoctor extends AsyncTask<String, String, JSONObject> {

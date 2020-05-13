@@ -1,7 +1,5 @@
 package com.example.fyp_anroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -77,15 +77,23 @@ public class SearchResult extends AppCompatActivity {
 
         BackToSearchPanel.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                GoToSearchPanel();
+                BackPage();
             }
         });
 
     }
 
-    public void GoToSearchPanel(){
-        Intent intent = new Intent(this, SearchPanel.class);
+    public void BackPage(){
 
-        startActivity(intent);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String backpage = preferences.getString("BackPage", null);
+        if(backpage.equals("SearchPanel")){
+            Intent intent = new Intent(this, SearchPanel.class);
+            startActivity(intent);
+        }else if(backpage.equals("HomePage")){
+            Intent intent = new Intent(this, HomePage.class);
+            startActivity(intent);
+        }
+
     }
 }
