@@ -176,8 +176,10 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
                 if(isFavorite){
                    // AddDelFavorite.setText("DelFavorite");
 
+                    AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_black_18dp);
                 }else{
                    // AddDelFavorite.setText("AddFavorite");
+                    AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_border_black_18dp);
                 }
 
                 mDialog.dismiss();
