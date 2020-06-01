@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
     JSONParser jsonParser=new JSONParser();
-    Button btnSearch,btnFavorite,btnlogout;
+    Button btnSearch,btnFavorite,btnlogout, btnUpload;
     String userId ="";
     String URL= "https://ivefypnodejsbackned.herokuapp.com/favorites/getallbyuserid";
     @Override
@@ -33,6 +33,7 @@ public class HomePage extends AppCompatActivity {
         btnSearch = (Button)findViewById(R.id.btn_search);
         btnFavorite = (Button)findViewById(R.id.btn_favorite);
         btnlogout= (Button)findViewById(R.id.btn_logout);
+        btnUpload = (Button)findViewById(R.id.btn_upload);
         //---get user id
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = preferences.getString("LoginUserId", null);
@@ -53,8 +54,18 @@ public class HomePage extends AppCompatActivity {
                 getAllFavoriteByUserId.execute(userId);
             }
         });
+        btnUpload.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                GoToUploadFilePage();
+            }
+        });
     }
 
+    public void GoToUploadFilePage(){
+        Intent intent = new Intent(this, UploadDoctoeListPage.class);
+
+        startActivity(intent);
+    }
     public void GoToSearchPanel(){
         Intent intent = new Intent(this, SearchPanel.class);
 

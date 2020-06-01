@@ -23,7 +23,7 @@
             <EditText android:id="@+id/editName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/UserNameHint"
+                android:hint="@string/EmailHint"
                 android:textColor="#FF192133"
                 android:textColorHint="#A0192133"
                 android:fontFamily="sans-serif-light"
