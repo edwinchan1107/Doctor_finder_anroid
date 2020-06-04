@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
+import java.io.File;
+
 public class UploadDoctoeListPage extends AppCompatActivity {
     Button uploadFileBtn;
     int FILE_PICKER_REQUEST_CODE = 1;
@@ -30,8 +32,26 @@ public class UploadDoctoeListPage extends AppCompatActivity {
         //---
         setContentView(R.layout.activity_upload_doctoe_list_page);
         uploadFileBtn = findViewById(R.id.btn_uploadFile);
+        String filepath = Environment.getExternalStorageDirectory().getPath();
+        String path = Environment.DIRECTORY_DOWNLOADS;
+        File test = Environment.getExternalStoragePublicDirectory("Download");
+        String test2 = this.getFilesDir().getAbsolutePath();
         uploadFileBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
+                //---test2
+//                Intent intent = new Intent();
+//                intent.setType("*/*");
+//                if (Build.VERSION.SDK_INT < 19) {
+//                    intent.setAction(Intent.ACTION_GET_CONTENT);
+//                    intent = Intent.createChooser(intent, "Select file");
+//                } else {
+//                    intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+//                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+//                    String[] mimetypes = { "audio/*", "video/*" ,"xlsx/*"};
+//                    intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
+//                }
+//                startActivityForResult(intent, 1001);
+                //---
                //---open file chooser
 
 //                Intent intent = new Intent( Intent.ACTION_PICK );
@@ -58,7 +78,18 @@ public class UploadDoctoeListPage extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), filePath, Toast.LENGTH_LONG).show();
         }
     }
-
+//@Override
+//public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//    super.onActivityResult(requestCode, resultCode, data);
+//    if (requestCode == 1001
+//            && resultCode == Activity.RESULT_OK && data != null) {
+//        Uri uri = data.getData();
+//        if (uri != null) {
+//            // TODO: handle your case
+//            Toast.makeText(getApplicationContext(), uri.toString(), Toast.LENGTH_LONG).show();
+//        }
+//    }
+//}
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch(requestCode){
@@ -74,35 +105,7 @@ public class UploadDoctoeListPage extends AppCompatActivity {
 
     }
 
-//        @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        // TODO Auto-generated method stub
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        // 有選擇檔案
-//        if ( resultCode == RESULT_OK )
-//        {
-//            // 取得檔案的 Uri
-//            Uri uri = data.getData();
-//            if( uri != null )
-//            {
-//                // 利用 Uri 顯示 ImageView 圖片
-////                ImageView iv = (ImageView)this.findViewById(R.id.imageViewObj);
-////                iv.setImageURI( uri );
-////
-////                setTitle( uri.toString() );
-//            }
-//            else
-//            {
-//                setTitle("無效的檔案路徑 !!");
-//            }
-//        }
-//        else
-//        {
-//            setTitle("取消選擇檔案 !!");
-//        }
-//    }
+
 
 }
 
