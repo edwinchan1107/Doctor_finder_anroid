@@ -16,12 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UploadDoctoeListPage"></activity>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
-
+        <activity android:name=".UploadDoctoeListPage"></activity>
         <activity android:name=".Comment_list_view_adapter" />
         <activity android:name=".CommentPage" />
         <activity android:name=".DoctorPage" />

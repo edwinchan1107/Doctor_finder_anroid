@@ -33,12 +33,15 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -65,7 +68,19 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_panel);
-
+        //---get medical list
+        Gson gson = new Gson();
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(SearchPanel.this);
+        String json = pref.getString("MedicalListID", "");
+        Log.d("Searchp json medical", json);
+        Type type = new TypeToken<List<String>>() {
+        }.getType();
+        List<String> MedicalList = gson.fromJson(json, type);
+        for (String item:
+             MedicalList) {
+            Log.d("Loop", item);
+        }
+        //get medical list
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -161,6 +176,7 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
             mGoogleApiClient.connect();
              status = "GoogleApiClient has started. You can see the location icon in status bar";
         }
+        Log.d("getCurrentLocation", status);
     }
     public void onConnected(@Nullable Bundle connectionHint) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
@@ -172,7 +188,7 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
         } else {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             Log.d("xxxx", "99");
-
+//            Log.d("mLastLocation",mLastLocation.getLatitude()+"  "+mLastLocation.getLongitude());
             if (mLastLocation != null) {
                 CurrentLatitudeText = mLastLocation.getLatitude();
                 CurrentLongitudeText = mLastLocation.getLongitude();

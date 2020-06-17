@@ -40,6 +40,7 @@ public class CommentPage extends AppCompatActivity {
 
     String URL= "https://ivefypnodejsbackned.herokuapp.com/Comment/getallbybelongto";
     String CreateCommentURL= "https://ivefypnodejsbackned.herokuapp.com/Comment/";
+    String UpdateMiningRankURL = "https://ivefypnodejsbackned.herokuapp.com/Doctor_info/UpdateMiningMark";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,7 @@ public class CommentPage extends AppCompatActivity {
         //get doctor id first
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         doctorId = preferences.getString("_id", null);
+        Log.d("CurrentDoctorID : ", "onCreate: ");
         //get user id
         userId = preferences.getString("LoginUserId", null);
         //set the ListView
@@ -70,6 +72,9 @@ public class CommentPage extends AppCompatActivity {
                 CreateComment createComment = new CreateComment(CommentPage.this);
                 String ed_Comment_string = ed_Comment.getText().toString();
                 createComment.execute(ed_Comment_string);
+                //---update mining rank
+                UpdateMiningRank updateMiningRank = new UpdateMiningRank(CommentPage.this);
+                updateMiningRank.execute(ed_Comment_string);
                 //--Refresh the Comment list view
                 GetAllCommentByDoctor getAllCommentByDoctor= new GetAllCommentByDoctor(CommentPage.this);
                 getAllCommentByDoctor.execute(doctorId);
@@ -190,6 +195,52 @@ public class CommentPage extends AppCompatActivity {
                 if(message=="Comment created"){
                     Toast toast=Toast.makeText(CommentPage.this, message, Toast.LENGTH_LONG);
                     toast.show();
+                }
+                mDialog.dismiss();
+
+            }catch(Exception ex){
+                mDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Unable to retrieve any data from server", Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+    }
+
+    private class UpdateMiningRank extends AsyncTask<String, String, JSONObject> {
+        Context context;
+        ProgressDialog mDialog;
+        UpdateMiningRank(Context context){
+            this.context = context;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mDialog = new ProgressDialog(context);
+            mDialog.setMessage("Please wait...");
+            mDialog.show();
+        }
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            Log.d("In","Doinbackground");
+            ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+            String Comment = args[0];
+
+            params.add(new BasicNameValuePair("Belongto", doctorId));
+            params.add(new BasicNameValuePair("Createby", userId));
+            params.add(new BasicNameValuePair("Comment", Comment));
+            JSONObject json = jsonParser.makeHttpRequest(UpdateMiningRankURL, "POST",params);
+            return json;
+        }
+        protected void onPostExecute(JSONObject result) {//JSONARRAY
+            Log.d("In", "onPostExecute: ");
+
+            try {
+                String message = result.getString("message");
+                if(message=="Updated"){
+//                    Toast toast=Toast.makeText(CommentPage.this, "", Toast.LENGTH_LONG);
+//                    toast.show();
                 }
                 mDialog.dismiss();
 

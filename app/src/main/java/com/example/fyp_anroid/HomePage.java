@@ -11,7 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.http.NameValuePair;
@@ -26,6 +27,7 @@ public class HomePage extends AppCompatActivity {
     Button btnSearch,btnFavorite,btnlogout, btnUpload;
     String userId ="";
     String URL= "https://ivefypnodejsbackned.herokuapp.com/favorites/getallbyuserid";
+    String MedicalListURL = "https://ivefypnodejsbackned.herokuapp.com/medical_list/getallbyuser";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,9 @@ public class HomePage extends AppCompatActivity {
         //---get user id
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = preferences.getString("LoginUserId", null);
+
+        GetAllMedicalListByUserId getAllMedicalListByUserId = new GetAllMedicalListByUserId(HomePage.this);
+        getAllMedicalListByUserId.execute(userId);
         //Button event
         btnSearch.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
@@ -145,6 +150,86 @@ public class HomePage extends AppCompatActivity {
                 intent.putStringArrayListExtra("location", location);
                 intent.putStringArrayListExtra("mark", mark);
                 startActivity(intent);
+                mDialog.dismiss();
+            }catch(Exception ex){
+                mDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Unable to retrieve any data from server", Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+    }
+
+
+    private class GetAllMedicalListByUserId extends AsyncTask<String, String, JSONObject> {
+        Context context;
+        ProgressDialog mDialog;
+        GetAllMedicalListByUserId(Context context){
+            this.context = context;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mDialog = new ProgressDialog(context);
+            mDialog.setMessage("Please wait...");
+            mDialog.show();
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(HomePage.this);
+            SharedPreferences.Editor editor = pref.edit();
+
+            editor.putString("BackPage","HomePage");
+            editor.apply();
+        }
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            Log.d("In","Doinbackground");
+            String useridd = args[0];
+            Log.d("ARGS0", useridd);
+            ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+            Log.d("YOYYOYO", userId);
+            params.add(new BasicNameValuePair("UserId", userId));
+            JSONObject json = jsonParser.makeHttpRequest(MedicalListURL, "POST",params);
+            return json;
+        }
+        protected void onPostExecute(JSONObject result) {//JSONARRAY
+            Log.d("In", "onPostExecute: ");
+            // dismiss the dialog once product deleted
+            //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_LONG).show();
+            ArrayList _id = new ArrayList();
+            ArrayList name_chi = new ArrayList();
+            ArrayList name_eng = new ArrayList();
+            ArrayList price = new ArrayList();
+            ArrayList location = new ArrayList();
+            ArrayList location_region = new ArrayList();
+            ArrayList mark = new ArrayList();
+            ArrayList image = new ArrayList();
+            ArrayList gender = new ArrayList();
+            ArrayList qualification = new ArrayList();
+            ArrayList openTime = new ArrayList();
+            ArrayList website = new ArrayList();
+            ArrayList subjectList = new ArrayList();
+            ArrayList infopath = new ArrayList();
+            try {
+                Log.d("result json", result+"");
+                JSONArray ja = result.getJSONArray("item");
+
+                for (int i=0;i<ja.length();i++){
+                    JSONObject jo = ja.getJSONObject(i);
+                    Log.d("doctorinfo", jo+"");
+                    _id.add(jo.getString("_id"));
+//                    name_chi.add(jo.getString("name_chi"));
+//                    name_eng.add(jo.getString("name_eng"));
+//                    location.add(jo.getString("location"));
+//                    mark.add(jo.getString("mark"));
+                }
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(HomePage.this);
+                SharedPreferences.Editor editor = pref.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(_id);
+                Log.d("MedicalList JSon :", json);
+                editor.putString("MedicalListID",json );
+                editor.commit();
+                editor.apply();
                 mDialog.dismiss();
             }catch(Exception ex){
                 mDialog.dismiss();
