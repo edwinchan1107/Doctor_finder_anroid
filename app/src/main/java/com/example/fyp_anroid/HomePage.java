@@ -28,6 +28,7 @@ public class HomePage extends AppCompatActivity {
     String userId ="";
     String URL= "https://ivefypnodejsbackned.herokuapp.com/favorites/getallbyuserid";
     String MedicalListURL = "https://ivefypnodejsbackned.herokuapp.com/medical_list/getallbyuser";
+    ArrayList MedicalList = new ArrayList();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +130,8 @@ public class HomePage extends AppCompatActivity {
             ArrayList website = new ArrayList();
             ArrayList subjectList = new ArrayList();
             ArrayList infopath = new ArrayList();
+            ArrayList PassMedicalList = new ArrayList();
+            Boolean isMedicalList =false;
             try {
                 Log.d("result json", result+"");
                 JSONArray ja = result.getJSONArray("Recode");
@@ -136,12 +139,28 @@ public class HomePage extends AppCompatActivity {
                 for (int i=0;i<ja.length();i++){
                     JSONObject jo = ja.getJSONObject(i);
                     JSONObject doctorinfo = jo.getJSONObject("Doctor_info");
+                    for (Object item :
+                            MedicalList) {
+                        Log.d("item", item.toString());
+                        Log.d("Doctor_id", doctorinfo.getString("_id"));
+                        if(item.toString().equals(doctorinfo.getString("_id"))){
+                            isMedicalList = true;
+                            break;
+                        }
+                    }
+
                     Log.d("doctorinfo", doctorinfo+"");
                     _id.add(doctorinfo.getString("_id"));
                     name_chi.add(doctorinfo.getString("name_chi"));
                     name_eng.add(doctorinfo.getString("name_eng"));
                     location.add(doctorinfo.getString("location"));
                     mark.add(doctorinfo.getString("mark"));
+                    if(isMedicalList){
+                        PassMedicalList.add(true);
+                    }else{
+                        PassMedicalList.add(false);
+                    }
+                    isMedicalList =false;
                 }
                 Intent intent = new Intent(HomePage.this, SearchResult.class);
                 intent.putStringArrayListExtra("_id", _id);
@@ -149,6 +168,7 @@ public class HomePage extends AppCompatActivity {
                 intent.putStringArrayListExtra("name_chi", name_chi);
                 intent.putStringArrayListExtra("location", location);
                 intent.putStringArrayListExtra("mark", mark);
+                intent.putStringArrayListExtra("PassMedicalList", PassMedicalList);
                 startActivity(intent);
                 mDialog.dismiss();
             }catch(Exception ex){
@@ -216,11 +236,10 @@ public class HomePage extends AppCompatActivity {
                 for (int i=0;i<ja.length();i++){
                     JSONObject jo = ja.getJSONObject(i);
                     Log.d("doctorinfo", jo+"");
-                    _id.add(jo.getString("_id"));
-//                    name_chi.add(jo.getString("name_chi"));
-//                    name_eng.add(jo.getString("name_eng"));
-//                    location.add(jo.getString("location"));
-//                    mark.add(jo.getString("mark"));
+                    String DoctorID = jo.getJSONObject("DoctorId").getString("_id");
+
+                    _id.add(DoctorID);
+                    MedicalList.add(DoctorID);
                 }
                 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(HomePage.this);
                 SharedPreferences.Editor editor = pref.edit();

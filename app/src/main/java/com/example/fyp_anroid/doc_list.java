@@ -7,12 +7,21 @@ public class doc_list {
     private String name_chi;
     private String location;
     private String mark;
-    public doc_list(String id, String name_eng,String name_chi,String location,String mark) {
+    private Boolean Medical;
+    public doc_list(String id, String name_eng,String name_chi,String location,String mark,Boolean Medical) {
         this.id = id;
         this.name_eng = name_eng;
         this.name_chi = name_chi;
         this.location = location;
         this.mark = mark;
+        this.Medical = Medical;
+    }
+    public Boolean getMedical(){
+        return Medical;
+    }
+
+    public void setMedical(Boolean medical) {
+        Medical = medical;
     }
 
     public String getId() {

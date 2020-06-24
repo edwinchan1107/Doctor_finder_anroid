@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class SearchResult extends AppCompatActivity {
     ArrayList website = new ArrayList();
     ArrayList subjectList = new ArrayList();
     ArrayList infopath = new ArrayList();
+    ArrayList PassMedicalList = new ArrayList();
     Button BackToSearchPanel ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +54,9 @@ public class SearchResult extends AppCompatActivity {
         name_chi = i.getStringArrayListExtra("name_chi");
         location = i.getStringArrayListExtra("location");
         mark = i.getStringArrayListExtra("mark");
-
+        PassMedicalList = i.getStringArrayListExtra("PassMedicalList");
         for (int gg = 0; gg < name_eng.size(); gg++) {
-            mData.add(new doc_list((String) _id.get(gg), (String) name_eng.get(gg),(String) name_chi.get(gg),(String) location.get(gg),(String)mark.get(gg) ));
+            mData.add(new doc_list((String) _id.get(gg), (String) name_eng.get(gg),(String) name_chi.get(gg),(String) location.get(gg),(String)mark.get(gg),(Boolean)PassMedicalList.get(gg)));
         }
         mAdapter = new list_view_adapter((LinkedList<doc_list>) mData, mContext);
 //        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, (ArrayList)contactList);

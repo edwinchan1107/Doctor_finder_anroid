@@ -63,6 +63,7 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
     String [] regionList = {"","中西區","灣仔區","東區","南區","黃大仙區","觀塘區","深水埗區","油尖旺區","九龍城區","北區","大埔區","沙田區","西貢區","葵青區","荃灣區","屯門區","元朗區","離島區"};
     String RegionString = "";
     String status;
+    List<String> MedicalList;
     protected GoogleApiClient mGoogleApiClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
         Log.d("Searchp json medical", json);
         Type type = new TypeToken<List<String>>() {
         }.getType();
-        List<String> MedicalList = gson.fromJson(json, type);
+        MedicalList = gson.fromJson(json, type);
         for (String item:
              MedicalList) {
             Log.d("Loop", item);
@@ -305,12 +306,23 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
             ArrayList website = new ArrayList();
             ArrayList subjectList = new ArrayList();
             ArrayList infopath = new ArrayList();
+            ArrayList PassMedicalList = new ArrayList();
+            Boolean isMedicalList =false;
             try {
                 Log.d("result json", result+"");
               JSONArray ja = result.getJSONArray("Doctor_info");
 
                 for (int i=0;i<ja.length();i++){
                     JSONObject jo = ja.getJSONObject(i);
+                    for (String item :
+                            MedicalList) {
+//                        Log.d("item", item);
+//                        Log.d("_id", jo.getString("_id"));
+                        if(item.toString().equals(jo.getString("_id"))){
+                            isMedicalList = true;
+                            break;
+                        }
+                    }
                     _id.add(jo.getString("_id"));
                     name_chi.add(jo.getString("name_chi"));
                     name_eng.add(jo.getString("name_eng"));
@@ -319,8 +331,20 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
                     location_region.add(jo.getString("location_region"));
                     mark.add(jo.getString("mark"));
                     qualification.add(jo.getString("qualification"));
-                //    Log.d("name_eng",jo.getString("name_eng"));
-                //    Log.d("qualification",jo.getString("qualification"));
+                   // Log.d("ENG NAME ", jo.getString("name_eng"));
+                    if(isMedicalList){
+                        Log.d("ENG NAME ", jo.getString("name_eng"));
+                        Log.d("IS", "IN Medical List: ");
+                        PassMedicalList.add(true);
+                    }else{
+                        PassMedicalList.add(false);
+                        Log.d("ENG NAME ", jo.getString("name_eng"));
+                        Log.d("IS NOT", "IN Medical List: ");
+                    }
+//                    for (Object test :
+//                            PassMedicalList) {
+//                        Log.d("PassM", test.toString());
+//                    }
                 }
                 Intent intent = new Intent(SearchPanel.this, SearchResult.class);
                 intent.putStringArrayListExtra("_id", _id);
@@ -328,6 +352,7 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
                 intent.putStringArrayListExtra("name_chi", name_chi);
                 intent.putStringArrayListExtra("location", location);
                 intent.putStringArrayListExtra("mark", mark);
+                intent.putStringArrayListExtra("PassMedicalList", PassMedicalList);
                 startActivity(intent);
                 mDialog.dismiss();
             }catch(Exception ex){

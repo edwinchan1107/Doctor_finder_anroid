@@ -47,11 +47,18 @@ public class list_view_adapter extends BaseAdapter {
         TextView tv_Name_chi = (TextView) convertView.findViewById(R.id.tvName_chi);
         TextView tv_location = (TextView) convertView.findViewById(R.id.tvlocation);
         TextView tv_mark     = (TextView) convertView.findViewById(R.id.tvmark);
+        TextView tv_Medical     = (TextView) convertView.findViewById(R.id.tvMedical);
         //tv_ID.setText("_id : "+mData.get(position).getId());
         tv_Name_eng.setText(mContext.getResources().getString(R.string.DoctorNameTv)+mData.get(position).getName_eng());
         tv_Name_chi.setText(mContext.getResources().getString(R.string.DoctorChiName)+mData.get(position).getName_chi());
         tv_location.setText(mContext.getResources().getString(R.string.location)+" : "+mData.get(position).getLocation());
         tv_mark.setText("Mark : "+mData.get(position).getMark());
+        if(mData.get(position).getMedical()){
+            tv_Medical.setText("Medical List");
+        }else{
+            tv_Medical.setText("");
+        }
+        //tv_Medical.setText("Medical List: "+mData.get(position).getMark());
 
 
 
