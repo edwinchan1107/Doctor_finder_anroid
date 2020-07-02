@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,11 +55,12 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
     protected Geocoder mGeocoder;
     Double CurrentLatitudeText;
     Double CurrentLongitudeText;
+    RadioGroup rg;
     Button btn_searchDoctor,btn_back;
     EditText et_doctorName, et_doctorchiName, et_location;
     TextView tv_doctorName ,tv_doctorChiName,tv_location,tv_subject;
     Spinner subject, regionDropDown;
-    String URL= "https://ivefypnodejsbackned.herokuapp.com/Doctor_info/search";
+    String URL= "https://ivefypnodejsbackned.herokuapp.com/Doctor_info/searchByRank";
     String RegionURL= "https://ivefypnodejsbackned.herokuapp.com/Doctor_info/getRegionByLocation";
     JSONParser jsonParser=new JSONParser();
     String [] regionList = {"","中西區","灣仔區","東區","南區","黃大仙區","觀塘區","深水埗區","油尖旺區","九龍城區","北區","大埔區","沙田區","西貢區","葵青區","荃灣區","屯門區","元朗區","離島區"};
@@ -91,7 +94,7 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
+        rg = (RadioGroup)findViewById(R.id.radio_group);
         btn_searchDoctor = (Button)findViewById(R.id.Search);
         et_doctorName = (EditText)findViewById(R.id.ET_DoctorName);
         tv_doctorName = (TextView)findViewById(R.id.TV_DoctorName);
@@ -153,9 +156,24 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
                         String DoctorEngName = et_doctorName.getText().toString();
                         String DoctorChiName = et_doctorchiName.getText().toString();
                         String location = et_location.getText().toString();
+                        String SortType="";
+                        switch(rg.getCheckedRadioButtonId()){
+                            case R.id.radio_Edr:
+                                SortType = "edrMark";
+                                break;
+                            case R.id.radio_Seedor:
+                                SortType = "seeDocMark";
+                                break;
+                            case R.id.radio_Mining:
+                                SortType = "miningMark";
+                                break;
+                        }
+                        Log.d("SortTTTTTType",SortType);
+
+
                         Log.d("CHIName", DoctorChiName);
-                        GetAllDoctorInfo getAllDoctorInfo = new GetAllDoctorInfo(SearchPanel.this);
-                        getAllDoctorInfo.execute(DoctorEngName, DoctorChiName, location,RegionString);
+                        SearchDoctorInfo SearchDoctorInfo = new SearchDoctorInfo(SearchPanel.this);
+                        SearchDoctorInfo.execute(DoctorEngName, DoctorChiName, location,RegionString,SortType);
 
 
                     }
@@ -252,10 +270,10 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
 
         startActivity(intent);
     }
-    private class GetAllDoctorInfo extends AsyncTask<String, String, JSONObject> {
+    private class SearchDoctorInfo extends AsyncTask<String, String, JSONObject> {
         Context context;
         ProgressDialog mDialog;
-        GetAllDoctorInfo(Context context){
+        SearchDoctorInfo(Context context){
             this.context = context;
         }
         @Override
@@ -279,12 +297,14 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
             String DoctorChiName = args[1];
             String location = args[2];
             String region = args[3];
+            String Sorttype = args[4];
             Log.d("DoctorChiName", DoctorChiName);
             ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("name_chi", DoctorChiName));
             params.add(new BasicNameValuePair("name_eng", DoctorEngName));
             params.add(new BasicNameValuePair("location", location));
             params.add(new BasicNameValuePair("region", region));
+            params.add(new BasicNameValuePair("SortByType", Sorttype));
             JSONObject json = jsonParser.makeHttpRequest(URL, "POST",params);
             return json;
         }
@@ -307,9 +327,12 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
             ArrayList subjectList = new ArrayList();
             ArrayList infopath = new ArrayList();
             ArrayList PassMedicalList = new ArrayList();
+            ArrayList EdrRank = new ArrayList();
+            ArrayList SeeDocRank = new ArrayList();
+            ArrayList MiningRank = new ArrayList();
             Boolean isMedicalList =false;
             try {
-                Log.d("result json", result+"");
+           //     Log.d("result json", result+"");
               JSONArray ja = result.getJSONArray("Doctor_info");
 
                 for (int i=0;i<ja.length();i++){
@@ -321,6 +344,8 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
                         if(item.toString().equals(jo.getString("_id"))){
                             isMedicalList = true;
                             break;
+                        }else{
+                            isMedicalList = false;
                         }
                     }
                     _id.add(jo.getString("_id"));
@@ -331,6 +356,10 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
                     location_region.add(jo.getString("location_region"));
                     mark.add(jo.getString("mark"));
                     qualification.add(jo.getString("qualification"));
+                    EdrRank.add(jo.getString("edrRank"));
+                    Log.d("TTTTT",jo.getString("edrRank"));
+                    SeeDocRank.add(jo.getString("seeDocRank"));
+                    MiningRank.add(jo.getString("miningRank"));
                    // Log.d("ENG NAME ", jo.getString("name_eng"));
                     if(isMedicalList){
                         Log.d("ENG NAME ", jo.getString("name_eng"));
