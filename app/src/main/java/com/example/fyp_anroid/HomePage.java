@@ -130,6 +130,9 @@ public class HomePage extends AppCompatActivity {
             ArrayList website = new ArrayList();
             ArrayList subjectList = new ArrayList();
             ArrayList infopath = new ArrayList();
+            ArrayList EdrRank = new ArrayList();
+            ArrayList SeeDocRank = new ArrayList();
+            ArrayList MiningRank = new ArrayList();
             ArrayList PassMedicalList = new ArrayList();
             Boolean isMedicalList =false;
             try {
@@ -151,10 +154,15 @@ public class HomePage extends AppCompatActivity {
 
                     Log.d("doctorinfo", doctorinfo+"");
                     _id.add(doctorinfo.getString("_id"));
+                    Log.d("doctorinfoIDDDDD", doctorinfo.getString("_id"));
                     name_chi.add(doctorinfo.getString("name_chi"));
                     name_eng.add(doctorinfo.getString("name_eng"));
                     location.add(doctorinfo.getString("location"));
+                    EdrRank.add(doctorinfo.getString("edrRank"));
+                    SeeDocRank.add(doctorinfo.getString("seeDocRank"));
+                    MiningRank.add(doctorinfo.getString("miningRank"));
                     mark.add(doctorinfo.getString("mark"));
+                    Log.d("Record", "ADDED");
                     if(isMedicalList){
                         PassMedicalList.add(true);
                     }else{
@@ -168,6 +176,9 @@ public class HomePage extends AppCompatActivity {
                 intent.putStringArrayListExtra("name_chi", name_chi);
                 intent.putStringArrayListExtra("location", location);
                 intent.putStringArrayListExtra("mark", mark);
+                intent.putStringArrayListExtra("EdrRank", EdrRank);
+                intent.putStringArrayListExtra("SeeDocRank", SeeDocRank);
+                intent.putStringArrayListExtra("MiningRank", MiningRank);
                 intent.putStringArrayListExtra("PassMedicalList", PassMedicalList);
                 startActivity(intent);
                 mDialog.dismiss();

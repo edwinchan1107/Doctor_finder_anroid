@@ -8,14 +8,46 @@ public class doc_list {
     private String location;
     private String mark;
     private Boolean Medical;
-    public doc_list(String id, String name_eng,String name_chi,String location,String mark,Boolean Medical) {
+    private String EdrRank;
+    private String SeeDocRank;
+    private String MiningRank;
+
+    public doc_list(String id, String name_eng,String name_chi,String location,String mark,Boolean Medical,String EdrRank,String SeeDocRank,String MiningRank) {
         this.id = id;
         this.name_eng = name_eng;
         this.name_chi = name_chi;
         this.location = location;
         this.mark = mark;
         this.Medical = Medical;
+        this.EdrRank = EdrRank;
+        this.SeeDocRank = SeeDocRank;
+        this.MiningRank = MiningRank;
     }
+
+    public String getEdrRank() {
+        return EdrRank;
+    }
+
+    public void setEdrRank(String edrRank) {
+        EdrRank = edrRank;
+    }
+
+    public String getSeeDocRank() {
+        return SeeDocRank;
+    }
+
+    public void setSeeDocRank(String seeDocRank) {
+        SeeDocRank = seeDocRank;
+    }
+
+    public String getMiningRank() {
+        return MiningRank;
+    }
+
+    public void setMiningRank(String miningRank) {
+        MiningRank = miningRank;
+    }
+
     public Boolean getMedical(){
         return Medical;
     }

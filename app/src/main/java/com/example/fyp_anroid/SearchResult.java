@@ -37,6 +37,9 @@ public class SearchResult extends AppCompatActivity {
     ArrayList website = new ArrayList();
     ArrayList subjectList = new ArrayList();
     ArrayList infopath = new ArrayList();
+    ArrayList EdrRank = new ArrayList();
+    ArrayList SeeDocRank = new ArrayList();
+    ArrayList MiningRank = new ArrayList();
     ArrayList PassMedicalList = new ArrayList();
     Button BackToSearchPanel ;
     @Override
@@ -54,9 +57,22 @@ public class SearchResult extends AppCompatActivity {
         name_chi = i.getStringArrayListExtra("name_chi");
         location = i.getStringArrayListExtra("location");
         mark = i.getStringArrayListExtra("mark");
+        EdrRank = i.getStringArrayListExtra("EdrRank");
+        SeeDocRank = i.getStringArrayListExtra("SeeDocRank");
+        MiningRank = i.getStringArrayListExtra("MiningRank");
         PassMedicalList = i.getStringArrayListExtra("PassMedicalList");
         for (int gg = 0; gg < name_eng.size(); gg++) {
-            mData.add(new doc_list((String) _id.get(gg), (String) name_eng.get(gg),(String) name_chi.get(gg),(String) location.get(gg),(String)mark.get(gg),(Boolean)PassMedicalList.get(gg)));
+            mData.add(new doc_list((String) _id.get(gg),
+                    (String) name_eng.get(gg),
+                    (String) name_chi.get(gg),
+                    (String) location.get(gg),
+                    (String)mark.get(gg),
+                    (Boolean)PassMedicalList.get(gg),
+                    (String)EdrRank.get(gg),
+                    (String)SeeDocRank.get(gg),
+                    (String)MiningRank.get(gg))
+
+            );
         }
         mAdapter = new list_view_adapter((LinkedList<doc_list>) mData, mContext);
 //        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, (ArrayList)contactList);

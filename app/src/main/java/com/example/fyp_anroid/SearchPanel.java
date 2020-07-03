@@ -381,6 +381,9 @@ public class SearchPanel extends AppCompatActivity implements GoogleApiClient.Co
                 intent.putStringArrayListExtra("name_chi", name_chi);
                 intent.putStringArrayListExtra("location", location);
                 intent.putStringArrayListExtra("mark", mark);
+                intent.putStringArrayListExtra("EdrRank", EdrRank);
+                intent.putStringArrayListExtra("SeeDocRank", SeeDocRank);
+                intent.putStringArrayListExtra("MiningRank", MiningRank);
                 intent.putStringArrayListExtra("PassMedicalList", PassMedicalList);
                 startActivity(intent);
                 mDialog.dismiss();

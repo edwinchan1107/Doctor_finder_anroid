@@ -40,7 +40,7 @@ public class CommentPage extends AppCompatActivity {
 
     String URL= "https://ivefypnodejsbackned.herokuapp.com/Comment/getallbybelongto";
     String CreateCommentURL= "https://ivefypnodejsbackned.herokuapp.com/Comment/";
-    String UpdateMiningRankURL = "https://ivefypnodejsbackned.herokuapp.com/Doctor_info/UpdateMiningMark";
+    String UpdateMiningRankURL = "https://ivefypnodejsbackned.herokuapp.com/Doctor_info/UpdateMiningRank";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +71,7 @@ public class CommentPage extends AppCompatActivity {
                 //--call api add comment first
                 CreateComment createComment = new CreateComment(CommentPage.this);
                 String ed_Comment_string = ed_Comment.getText().toString();
+                ed_Comment.getText().clear();
                 createComment.execute(ed_Comment_string);
                 //---update mining rank
                 UpdateMiningRank updateMiningRank = new UpdateMiningRank(CommentPage.this);
@@ -189,7 +190,6 @@ public class CommentPage extends AppCompatActivity {
         }
         protected void onPostExecute(JSONObject result) {//JSONARRAY
             Log.d("In", "onPostExecute: ");
-
             try {
                 String message = result.getString("message");
                 if(message=="Comment created"){
