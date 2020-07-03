@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
-    TextView name_eng,name_chi,mark,location;
+    TextView name_eng,name_chi,mark,location, tv_EdrRank,tv_SeeDocRank,tv_MiningRank;
     JSONParser jsonParser=new JSONParser();
     Button AddDelFavorite,GoComment;
     GoogleMap map;
@@ -53,6 +53,9 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
         //---setup google map
+        tv_EdrRank = (TextView)findViewById(R.id.detail_tv_EdrRank);
+        tv_SeeDocRank = (TextView)findViewById(R.id.detail_tv_SeeDocRank);
+        tv_MiningRank = (TextView)findViewById(R.id.detail_tv_MiningRank);
         name_eng = (TextView)findViewById(R.id.detail_tv_name_eng);
         name_chi = (TextView)findViewById(R.id.detail_tv_name_chi);
         mark = (TextView)findViewById(R.id.detail_tv_mark);
@@ -70,6 +73,8 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
         //---check is favorite?
         GetAllFavoriteByUserId getAllFavoriteByUserId = new GetAllFavoriteByUserId(this);
         getAllFavoriteByUserId.execute();
+
+
         GoComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,31 +159,29 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
                 Log.d("JSON ARRAY JA LENGTH", ja.length()+"");
 
                 for (int i=0;i<ja.length();i++){
-                    Log.d("CHECK ERROR", i+"");
+
                     JSONObject jo = ja.getJSONObject(i);
-                    Log.d("JSON OBJECT", jo+"");
+
 
 
                     JSONObject doctorinfo = jo.getJSONObject("Doctor_info");
-                    Log.d("doctorinfo", doctorinfo+"");
-                    Log.d("Doctor ID!!!!", doctorinfo.getString("_id"));
+
                     String docid = doctorinfo.getString("_id");
-                    Log.d("Doctor ID!222!!!", docid);
-                    Log.d("Doctor ID!222!!!", doctorId.toString());
+
                     if(docid.equals(doctorId)){
                         Log.d("INNNNNN", "YOYOYOYO ");
                         isFavorite = true;
                     }
-                    Log.d("YOYOYOY","HEYEYEHEHEYEHEYH");
-                    Log.d("isFavorite",isFavorite + "");
+
                 }
 
                 if(isFavorite){
                    // AddDelFavorite.setText("DelFavorite");
-
+                    Log.d("INNNNNN", "YOYOYOYO ");
                     AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_black_18dp);
                 }else{
                    // AddDelFavorite.setText("AddFavorite");
+                    Log.d("INNNNNN", "AAAAAAAAAAA ");
                     AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_border_black_18dp);
                 }
 
@@ -225,7 +228,7 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
         }
 
         protected void onPostExecute(JSONObject result) {//JSONARRAY
-            super.onPreExecute();
+           // super.onPreExecute();
             Log.d("In", "onPostExecute: ");
 
             try {
@@ -234,10 +237,23 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
                 String getname_eng = Doctor.getString("name_eng");
                 String getlocation = Doctor.getString("location");
                 String getmark = Doctor.getString("mark");
+                Log.d("TTTSSSSSSS", Doctor.toString());
+                String EdrRank = Doctor.getString("edrRank");
+                String SeeDocRank = Doctor.getString("seeDocRank");
+                String MiningRank = Doctor.getString("miningRank");
+                Log.d("TTTSSSSSSS", Doctor.getString("edrRank"));
                 name_eng.setText(getname_eng);
                 location.setText(getlocation);
                 name_chi.setText(getname_chi);
-                mark.setText("Mark : "+getmark);
+                Log.d("Check ", Doctor.getString("edrRank"));
+                Log.d("Check ", Doctor.getString("miningRank"));
+                Log.d("Check ", Doctor.getString("edrRank"));
+                tv_EdrRank.setText("Edr RK: "+EdrRank);
+                tv_SeeDocRank.setText("SeeDoc RK: "+SeeDocRank);
+                tv_MiningRank.setText("Mining RK: "+MiningRank);
+               // mark.setText("Mark : "+getmark);
+                mark.setText("");
+                Log.d("SETALLTV","ALLLLLLL");
                 mDialog.dismiss();
             }catch(Exception ex){
 

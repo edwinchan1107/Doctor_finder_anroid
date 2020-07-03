@@ -23,20 +23,58 @@
         android:id="@+id/BackDoctorPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@android:style/Widget.DeviceDefault.Button.Inset"
+
         android:text="@string/BackBtn" />
+
         <ListView
             android:id="@+id/CommentList"
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="408dp"
             android:layout_below="@id/BackDoctorPage"
-            android:layout_marginTop="1dp" />
+            android:layout_marginTop="1dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
 
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/CommentPage_CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="WithMark" />
 
-         <EditText
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="-10" />
+
+            <SeekBar
+                android:id="@+id/CommentPage_seekBar"
+                android:layout_width="wrap_content"
+                android:layout_weight="10"
+                android:layout_height="match_parent"
+                android:max="10"
+                android:min="0"
+                />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="10" />
+
+        </LinearLayout>
+        <EditText
         android:id="@+id/ed_comment"
         android:ems="10"
 

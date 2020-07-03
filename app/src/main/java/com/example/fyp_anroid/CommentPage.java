@@ -10,8 +10,10 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,17 +37,21 @@ public class CommentPage extends AppCompatActivity {
     JSONParser jsonParser=new JSONParser();
     EditText ed_Comment;
     Button add_Comment,btn_back;
+    CheckBox CheckBox;
+    SeekBar Seekbar;
     String doctorId = "";
     String userId ="";
 
     String URL= "https://ivefypnodejsbackned.herokuapp.com/Comment/getallbybelongto";
-    String CreateCommentURL= "https://ivefypnodejsbackned.herokuapp.com/Comment/";
+    String CreateCommentURL= "https://ivefypnodejsbackned.herokuapp.com/Comment/test";
     String UpdateMiningRankURL = "https://ivefypnodejsbackned.herokuapp.com/Doctor_info/UpdateMiningRank";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_page);
         //definition
+        CheckBox = (CheckBox)findViewById(R.id.CommentPage_CheckBox);
+        Seekbar = (SeekBar)findViewById(R.id.CommentPage_seekBar);
         ed_Comment = (EditText) findViewById(R.id.ed_comment);
         add_Comment = (Button) findViewById(R.id.add_comment);
         CommentList = (ListView)findViewById(R.id.CommentList);
@@ -72,7 +78,21 @@ public class CommentPage extends AppCompatActivity {
                 CreateComment createComment = new CreateComment(CommentPage.this);
                 String ed_Comment_string = ed_Comment.getText().toString();
                 ed_Comment.getText().clear();
-                createComment.execute(ed_Comment_string);
+                int Score = Seekbar.getProgress();
+                Double D_Score = Double.valueOf(Score);
+                Log.d("SORORORORO",Score+"");
+                String VM = "";
+                if(CheckBox.isChecked()){
+                    VM = "YES";
+                }
+                if(D_Score==5){
+                    D_Score = 0.0;
+                }else{
+                    D_Score = ((D_Score - 5) /5) *10;
+                }
+
+                Log.d("AFFFFFFFF",Score+"");
+                createComment.execute(ed_Comment_string,VM,D_Score+"");
                 //---update mining rank
                 UpdateMiningRank updateMiningRank = new UpdateMiningRank(CommentPage.this);
                 updateMiningRank.execute(ed_Comment_string);
@@ -181,10 +201,13 @@ public class CommentPage extends AppCompatActivity {
             Log.d("In","Doinbackground");
             ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
             String Comment = args[0];
-
+            String VM = args[1];
+            String Score = args[2];
             params.add(new BasicNameValuePair("Belongto", doctorId));
             params.add(new BasicNameValuePair("Createby", userId));
             params.add(new BasicNameValuePair("Comment", Comment));
+            params.add(new BasicNameValuePair("WithMark", VM));
+            params.add(new BasicNameValuePair("Score", Score));
             JSONObject json = jsonParser.makeHttpRequest(CreateCommentURL, "POST",params);
             return json;
         }
