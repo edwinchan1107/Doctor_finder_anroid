@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     EditText editPassword, editName;
-    Button btnSignIn;
+    Button btnSignIn,btnSignUp;
     Button btnPhone;
 
 
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         editName=(EditText)findViewById(R.id.editName);
         editPassword=(EditText)findViewById(R.id.editPassword);
         btnSignIn=(Button)findViewById(R.id.btnSignIn);
+        btnSignUp=(Button)findViewById(R.id.btnSignUp);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //--go to sign up page
+                GoToSignUpPage();
+            }
+        });
 
 
     }
@@ -125,7 +133,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Unable to retrieve any data from server", Toast.LENGTH_LONG).show();
                 }
             }catch(Exception ex){
-
+                mDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Unable to retrieve any data from server", Toast.LENGTH_LONG).show();
             }
 
 
@@ -140,7 +149,11 @@ public class MainActivity extends AppCompatActivity {
 
          startActivity(intent);
     }
+    public void GoToSignUpPage(){
+        Intent intent = new Intent(this, SignUpPage.class);
 
+        startActivity(intent);
+    }
 }
 
 

@@ -109,7 +109,8 @@ public class UploadDoctoeListPage extends AppCompatActivity {
             //讀取數據關閉
             workbook.close();
 
-
+            Toast toast=Toast.makeText(UploadDoctoeListPage.this, "Uploaded", Toast.LENGTH_LONG);
+            toast.show();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -174,6 +175,7 @@ public class UploadDoctoeListPage extends AppCompatActivity {
 
 
                 mDialog.dismiss();
+
             }catch(Exception ex){
                 mDialog.dismiss();
             //    Toast.makeText(getApplicationContext(), "Unable to retrieve any data from server", Toast.LENGTH_LONG).show();

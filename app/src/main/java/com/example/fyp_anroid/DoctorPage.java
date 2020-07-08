@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
-    TextView name_eng,name_chi,mark,location, tv_EdrRank,tv_SeeDocRank,tv_MiningRank;
+    TextView name_eng,name_chi,mark,location, tv_EdrRank,tv_SeeDocRank,tv_MiningRank,tv_MiningAVGMark;
     JSONParser jsonParser=new JSONParser();
     Button AddDelFavorite,GoComment;
     GoogleMap map;
@@ -56,6 +56,7 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
         tv_EdrRank = (TextView)findViewById(R.id.detail_tv_EdrRank);
         tv_SeeDocRank = (TextView)findViewById(R.id.detail_tv_SeeDocRank);
         tv_MiningRank = (TextView)findViewById(R.id.detail_tv_MiningRank);
+        tv_MiningAVGMark = (TextView)findViewById(R.id.detail_tv_MiningAVGMark);
         name_eng = (TextView)findViewById(R.id.detail_tv_name_eng);
         name_chi = (TextView)findViewById(R.id.detail_tv_name_chi);
         mark = (TextView)findViewById(R.id.detail_tv_mark);
@@ -161,9 +162,6 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
                 for (int i=0;i<ja.length();i++){
 
                     JSONObject jo = ja.getJSONObject(i);
-
-
-
                     JSONObject doctorinfo = jo.getJSONObject("Doctor_info");
 
                     String docid = doctorinfo.getString("_id");
@@ -241,7 +239,12 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
                 String EdrRank = Doctor.getString("edrRank");
                 String SeeDocRank = Doctor.getString("seeDocRank");
                 String MiningRank = Doctor.getString("miningRank");
+                String MiningCount = Doctor.getString("miningCount");
+                String miningAVGMark = Doctor.getString("miningAVGMark");
+                Log.d("MMMMMMM",MiningCount);
+                Log.d("MMMMMMM",miningAVGMark);
                 Log.d("TTTSSSSSSS", Doctor.getString("edrRank"));
+                tv_MiningAVGMark.setText(miningAVGMark);
                 name_eng.setText(getname_eng);
                 location.setText(getlocation);
                 name_chi.setText(getname_chi);

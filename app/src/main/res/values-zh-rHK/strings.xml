@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Doctor Finder</string>
     <string name="SignInBtn">登入</string>
+    <string name="SignUpBtn">註冊</string>
+    <string name="UserNameHint">用戶名</string>
+    <string name="CPasswordHint">確認密碼</string>
     <string name="EmailHint">電郵</string>
     <string name="PasswordHint">密碼</string>
     <string name="MyFavoriteBtn">我的最愛</string>

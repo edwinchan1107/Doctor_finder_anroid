@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Doctor Finder</string>
     <string name="SignInBtn">SIGN IN</string>
+    <string name="SignUpBtn">SIGN Up</string>
+
+    <string name="UserNameHint">UserName</string>
     <string name="EmailHint">Email</string>
     <string name="PasswordHint">Password</string>
+    <string name="CPasswordHint">Confirm Password</string>
     <string name="MyFavoriteBtn">My Favorite</string>
     <string name="SearchDoctorBtn">Search Doctor</string>
     <string name="DoctorNameTv">Doctor Name:</string>
