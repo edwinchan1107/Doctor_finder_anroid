@@ -176,11 +176,14 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
                 if(isFavorite){
                    // AddDelFavorite.setText("DelFavorite");
                     Log.d("INNNNNN", "YOYOYOYO ");
-                    AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_black_18dp);
+                 //   AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_black_18dp);
+
+                    AddDelFavorite.setText("del Favorite");
                 }else{
                    // AddDelFavorite.setText("AddFavorite");
                     Log.d("INNNNNN", "AAAAAAAAAAA ");
-                    AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_border_black_18dp);
+                  //  AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_border_black_18dp);
+                    AddDelFavorite.setText("Add Favorite");
                 }
 
 
@@ -244,7 +247,7 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
                 Log.d("MMMMMMM",MiningCount);
                 Log.d("MMMMMMM",miningAVGMark);
                 Log.d("TTTSSSSSSS", Doctor.getString("edrRank"));
-                tv_MiningAVGMark.setText(miningAVGMark);
+                tv_MiningAVGMark.setText("AVG : "+miningAVGMark);
                 name_eng.setText(getname_eng);
                 location.setText(getlocation);
                 name_chi.setText(getname_chi);
@@ -312,11 +315,13 @@ public class DoctorPage extends FragmentActivity implements OnMapReadyCallback {
                 if(isFavorite){
                    // AddDelFavorite.setText("AddFavorite");
                    // Drawable d = getResources().getDrawable(R.drawable.baseline_star_black_18dp);
-                    AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_border_black_18dp);
+              //      AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_border_black_18dp);
+                    AddDelFavorite.setText("Add Favorite");
                     isFavorite = false;
                 }else{
                    // AddDelFavorite.setText("DelFavorite");
-                    AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_black_18dp);
+              //      AddDelFavorite.setBackgroundResource(R.drawable.baseline_star_black_18dp);
+                    AddDelFavorite.setText("del Favorite");
 
                     isFavorite = true;
                 }

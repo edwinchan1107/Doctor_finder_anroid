@@ -62,7 +62,8 @@
         android:id="@+id/btn_Add_favorite"
         android:layout_width="194dp"
         android:layout_height="72dp"
-        android:background="@drawable/baseline_star_black_18dp"
+        android:text="@string/MyFavoriteBtn"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -70,7 +71,7 @@
         android:id="@+id/btn_go_comment"
         android:layout_width="214dp"
         android:layout_height="72dp"
-        android:background="@drawable/baseline_comment_black_18dp"
+        android:text="@string/CommentBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -78,8 +79,8 @@
         android:id="@+id/detail_tv_EdrRank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="56dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -88,8 +89,8 @@
         android:id="@+id/detail_tv_SeeDocRank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="56dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -98,8 +99,8 @@
         android:id="@+id/detail_tv_MiningRank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="56dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -108,12 +109,11 @@
         android:id="@+id/detail_tv_MiningAVGMark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="186dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="56dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
